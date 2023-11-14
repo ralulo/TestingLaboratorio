@@ -1,5 +1,5 @@
 import React from 'react';
-import { createEmptyLookup, Lookup } from 'common/models';
+import { createEmptyLookup, Lookup } from '../../models/lookup';
 
 export const useConfirmationDialog = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -12,9 +12,11 @@ export const useConfirmationDialog = () => {
       setItemToDelete(createEmptyLookup());
     },
     onClose: () => setIsOpen(false),
-    onOpenDialog: (item: Lookup) => {
+
+    onOpenDialog: (item: Lookup | null | undefined) => {
       setIsOpen(true);
-      setItemToDelete(item);
+      item ? setItemToDelete(item) : setItemToDelete(createEmptyLookup());
     },
   };
 };
+
